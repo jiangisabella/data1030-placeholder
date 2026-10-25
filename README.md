@@ -1,7 +1,7 @@
 # Predicting NLRB Union Election Outcomes
 
-DATA1030 Fall 2026 final project 
-Team name: Placeholder
+DATA1030 Fall 2026 final project \n 
+Team name: Placeholder \n
 Team members: Yanan Jiang, Sima Raha, Cunyan Ma, Niharika Adari, Sydney Meza
 
 ## Overview
