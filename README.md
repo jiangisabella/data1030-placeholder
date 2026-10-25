@@ -43,7 +43,7 @@ Run these from the main repo folder, in order:
 1. `python src/pdfs_to_csv.py` downloads the NLRB monthly reports and converts them to CSVs in `data/raw_csvs/`
 2. `python src/docket_scraping.py` scrapes each case's docket and participants into `data/docket_activity_merged.csv` and `data/case_participants_raw.csv`
 3. `python src/preprocessmanual.py` cleans and merges everything into `data/elections_clean.csv`
-4. EDA notebook (in progress) explores the data and makes the figures in `figures/`
+4. `src/combined_eda.ipynb` explores the data and makes the figures in `figures/`
 
 ## Repository structure
 - `data/` raw and cleaned data
