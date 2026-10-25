@@ -1,10 +1,6 @@
 # Python 3.14
-# Setup:
-#   python -m venv .venv
-#   .venv\Scripts\activate          (macOS/Linux: source .venv/bin/activate)
-#   pip install -r requirements.txt
-#   python -m ipykernel install --user --name data1030-nlrb --display-name "Python (data1030-nlrb)"
-#
+# Install into the project venv (.venv), not your global Python.
+# Full setup steps, including registering the data1030-nlrb kernel, are in README.md.
 
 numpy==2.5.4
 pandas==3.0.6

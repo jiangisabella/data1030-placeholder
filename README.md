@@ -29,14 +29,20 @@ The cleaned dataset, `data/elections_clean.csv`, has 15,270 single-union RC elec
 ## Setup
 Developed with Python 3.14.6. Package versions are listed in `requirements.txt`.
 
-Using conda:
+The project runs in a virtual environment (`.venv`) inside the repo folder.
 
-    conda env create -f environment.yml
-    conda activate data1030-placeholder
+1. Create the venv and install the packages (run from the main repo folder):
 
-Or using pip:
+       python -m venv .venv
+       .venv\Scripts\activate              (macOS/Linux: source .venv/bin/activate)
+       pip install -r requirements.txt
 
-    pip install -r requirements.txt
+2. Register the venv as a Jupyter kernel:
+
+       python -m ipykernel install --user --name data1030-nlrb --display-name "Python (data1030-nlrb)"
+
+3. Run the scripts from a terminal with the venv activated. 
+
 
 ## How to run
 Run these from the main repo folder, in order:
