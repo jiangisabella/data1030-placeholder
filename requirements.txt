@@ -5,7 +5,7 @@
 #   pip install -r requirements.txt
 #   python -m ipykernel install --user --name data1030-nlrb --display-name "Python (data1030-nlrb)"
 #
-s
+
 numpy==2.5.4
 pandas==3.0.6
 matplotlib==3.11.2
