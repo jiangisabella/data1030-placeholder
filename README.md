@@ -1,7 +1,8 @@
 # Predicting NLRB Union Election Outcomes
 
-DATA1030 Fall 2026 final project (Placeholder).
-Team: Yanan Jiang, Sima Raha, Cunyan Ma, Niharika Adari
+DATA1030 Fall 2026 final project 
+Team name: Placeholder
+Team members: Yanan Jiang, Sima Raha, Cunyan Ma, Niharika Adari, Sydney Meza
 
 ## Overview
 
@@ -40,7 +41,7 @@ Or using pip:
 ## How to run
 Run these from the main repo folder, in order:
 1. `python src/pdfs_to_csv.py` downloads the NLRB monthly reports and converts them to CSVs in `data/raw_csvs/`
-2. `python src/docket_scraping.py` scrapes each case's docket and participants into `data/docket_activity_merged.csv` and `data/case_participants_raw.csv`
+2. `python src/docket_scraping.py` scrapes each case's docket and participants into `data/raw_csvs/scraper_csvs/docket_activity_merged.csv` and `data/raw_csvs/scraper_csvs/case_participants_raw.csv`
 3. `python src/preprocessmanual.py` cleans and merges everything into `data/elections_clean.csv`
 4. `src/combined_eda.ipynb` explores the data and makes the figures in `figures/`
 
