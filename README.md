@@ -27,7 +27,7 @@ The cleaned dataset, `data/elections_clean.csv`, has 15,270 single-union RC elec
 
 
 ## Setup
-Developed with Python 3.14.6. Package versions are listed in `requirements.txt`.
+Developed with the Python 3.14.6. Package versions are listed in `requirements.txt`.
 
 The project runs in a virtual environment (`.venv`) inside the repo folder.
 
