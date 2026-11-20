@@ -1,4 +1,4 @@
-elections_clean.csv: one row per single-union RC election, 15,270 rows x 21 columns.
+elections_clean.csv: one row per single-union RC election, 15,296 rows x 21 columns.
 
 fiscal_year: (ordinal) NLRB fiscal year of the monthly report the election appears in. 
 A fiscal year runs from October to September (FY2012 = Oct 2011 - Sep 2012). 
@@ -82,18 +82,22 @@ parent_union: (categorical) parent union that the election union is part of
 	Other		smaller and independent unions
 
 
-eligible: (continuous) count of eligible voters in a union election
+eligible: (continuous) count of eligible voters in a union election.
+Missing (157 rows) where the report gave 0, or fewer eligible voters than votes cast.
 
 
 petition_date (yyyy-mm-dd): earliest date on which the union election is petitioned to the NLRB. 
-If the docket lists none, the case file date from the monthly report is used instead. (*)
+If the docket lists none, the case file date from the monthly report is used instead.
+Missing (708 rows) where neither source has a date. (*)
 
 
 election_date (yyyy-mm-dd): date on which the union election takes place. 
-Where the report left it blank, it is filled from the docket's first Tally of Ballots (*)
+Where the report left it blank, it is filled from the docket's first Tally of Ballots.
+Missing (26 rows) where neither source has a date; these rows are kept. (*)
 
 
-days_petition_to_election: (continuous) duration between election date and petition date, counted in days
+days_petition_to_election: (continuous) duration between election date and petition date, counted in days.
+Missing (736 rows) where either date is missing or the petition is dated after the vote.
 
 
 n_participants: (continuous) number of parties and representatives who participated in the case (employer, union, lawyers, intervenors)

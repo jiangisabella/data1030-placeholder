@@ -418,6 +418,9 @@ df.loc[after_close, "election_date"] = pd.NaT
 """
 missing election dates, use the first Tally of Ballots in the docket, which for most elections is the day of the vote
 (median 0 days). 
+the few still missing after this are KEPT with a missing election_date
+their days_petition_to_election is also missing, and the ML pipeline
+handles both like any other missing value.
 """
 no_date = df["election_date"].isna()
 tally = df["case_number"].map(first_tally)
@@ -426,8 +429,7 @@ df.loc[fill, "election_date"] = tally[fill]
 
 still_no_date = df["election_date"].isna()
 print(f"no election date: {no_date.sum()}, filled from the docket tally: {fill.sum()}, "
-      f"no tally (dropped): {still_no_date.sum()}")
-df = df[~still_no_date].copy()
+      f"no tally (kept, election_date left missing): {still_no_date.sum()}")
 
 """
 the vote counts and how the case closed come after the vote, and
