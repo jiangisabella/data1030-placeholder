@@ -664,23 +664,59 @@ print(f"petition date found: {df['petition_date'].notna().sum()} "
 print(df["days_petition_to_election"].describe().round(1).to_dict())
 
 
+# %%
+"""
+features from the election date and from the employer's earlier elections:
+
+- election_year: the calendar year of the vote. this is the year to use as a
+  feature. fiscal_year is the year of the report that listed the case as
+  closed, which can be long after the vote (often because of objections after
+  the vote).
+- employer_prior_wins / employer_prior_losses: how many elections at the same
+  employer the union won / lost on an EARLIER date. these are public NLRB
+  records, so they are known before the vote. elections on the same date
+  (other units voting the same day) don't count, and an employer's first
+  election gets 0 and 0. elections without an election date get NaN 
+  our data starts in FY2012, so history before that is not counted.
+"""
+df["election_year"] = df["election_date"].dt.year
+
+# one row per employer and election date: how many elections, and how many the union won
+by_date = (df.dropna(subset=["election_date"])
+             .groupby(["employer", "election_date"])["union_won"]
+             .agg(n="size", wins="sum")
+             .reset_index()
+             .sort_values(["employer", "election_date"]))
+# running totals per employer minus the current date, so only strictly earlier dates count
+by_date["prior_n"] = by_date.groupby("employer")["n"].cumsum() - by_date["n"]
+by_date["employer_prior_wins"] = by_date.groupby("employer")["wins"].cumsum() - by_date["wins"]
+by_date["employer_prior_losses"] = by_date["prior_n"] - by_date["employer_prior_wins"]
+
+# add the history onto every election
+df = df.merge(by_date[["employer", "election_date", "employer_prior_wins", "employer_prior_losses"]],
+              on=["employer", "election_date"], how="left")
+
+
 
 """
 column order for the output. everything here is known before the vote
-except the target 
+except the target and the bookkeeping columns (fiscal_year is the year the
+case closed, so it is not a feature)
 """
 KEEP = [
     # ids / bookkeeping
     "fiscal_year", "case_number",
     # from the reports
     "case_name", "employer", "city", "state", "census_region",
-    "union_name", "parent_union", "eligible", "election_date",
+    "union_name", "parent_union", "eligible", "election_date", "election_year",
     # participants
     "n_participants", "employer_has_lawyer", "n_employer_lawyers",
     "employer_law_firms", "petitioner_has_lawyer", "n_petitioner_lawyers",
     "has_intervenor",
     # docket
     "petition_date", "days_petition_to_election",
+    # employer history (earlier elections only)
+    "employer_prior_wins", "employer_prior_losses",
     # target
     "union_won",
 ]

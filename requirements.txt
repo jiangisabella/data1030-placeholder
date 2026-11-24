@@ -1,10 +1,19 @@
-# Python 3.14
+# Python 3.14.6
 # Install into the project venv (.venv), not your global Python.
 # Full setup steps, including registering the data1030-nlrb kernel, are in README.md.
 
-numpy==2.5.4
-pandas==3.0.6
-matplotlib==3.11.2
+# same versions as the DATA1030 class environment (data1030.yml)
+numpy==2.4.6
+pandas==3.0.3
+matplotlib==3.11.0
+seaborn==0.13.2
+polars==1.41.2
+scikit-learn==1.9.0
+xgboost==3.2.0
+shap==0.52.0
+tabpfn==8.0.8
+
+# project-only: data collection (pdfs_to_csv.py, docket_scraping.py) and the Jupyter kernel
 requests==2.34.2
 beautifulsoup4==4.15.0
 pdfplumber==0.11.10

@@ -2,7 +2,7 @@ name: data1030-placeholder
 channels:
   - conda-forge
 dependencies:
-  - python=3.14
+  - python=3.14.6
   - pip
   - pip:
       - -r requirements.txt

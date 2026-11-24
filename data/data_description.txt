@@ -1,8 +1,10 @@
-elections_clean.csv: one row per single-union RC election, 15,296 rows x 21 columns.
+elections_clean.csv: one row per single-union RC election, 15,296 rows x 24 columns.
 
 fiscal_year: (ordinal) NLRB fiscal year of the monthly report the election appears in. 
 A fiscal year runs from October to September (FY2012 = Oct 2011 - Sep 2012). 
 Ordered from earliest to latest.
+The report lists cases when they close, which can be long after the vote, so this is
+bookkeeping only and not a feature; election_year is used instead. (*)
 
 	2012
 	2013
@@ -96,6 +98,14 @@ Where the report left it blank, it is filled from the docket's first Tally of Ba
 Missing (26 rows) where neither source has a date; these rows are kept. (*)
 
 
+election_year: (ordinal, treated as continuous in preprocessing) calendar year of the election, from election_date.
+Missing (26 rows) where the election date is missing.
+
+	2004
+	...
+	2026
+
+
 days_petition_to_election: (continuous) duration between election date and petition date, counted in days.
 Missing (736 rows) where either date is missing or the petition is dated after the vote.
 
@@ -128,6 +138,15 @@ has_intervenor: (binary categorical)  describes the presence of intervenors duri
 
 	1  has intervenors
 	0  does not have intervenors
+
+
+employer_prior_wins: (continuous) number of elections at the same employer that the union won on an earlier date.
+Only earlier dates count (other units voting the same day don't). 0 for an employer's first election.
+Missing (26 rows) where the election date is missing. History before FY2012 is not in the data.
+
+
+employer_prior_losses: (continuous) number of elections at the same employer that the union lost on an earlier date.
+Same rules as employer_prior_wins.
 
 
 union_won: (binary categorical) [Target variable] describes the final official union election result based on vote counts
